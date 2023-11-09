@@ -1,9 +1,17 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default {
-  entry: ['./src/ejercicios.js', './src/styles.css'],
+  entry: ['./src/ejercicios.ts', './src/styles.css'],
+  output: {
+    filename: 'bundle.js'
+  },
   module: {
     rules: [
+      {
+        test: /\.ts$/,
+        use: 'babel-loader',
+        exclude: /node_modules/
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -15,6 +23,9 @@ export default {
         use: ['style-loader', 'css-loader']
       }
     ]
+  },
+  resolve: {
+    extensions: ['.ts', '.js']
   },
   devServer: {
     port: 8080
